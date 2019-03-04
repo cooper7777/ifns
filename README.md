@@ -18,6 +18,29 @@ Or install it yourself as:
 
 ## Usage
 
+Create intitializer `config/initializers/ifns.rb`
+
+```ruby
+Ifns.configure do |config|
+  config.host = 'YOUR_HOST'
+  config.token = 'YOUR_TOKEN'
+  config.logger = 'YOUR_LOGGER'
+end
+```
+
+```ruby
+example_data = { id: 'resource_id', fn: 8710000101674196, fd: 7078, fpd: 1050183412, date: '2019-03-01T12:21:00', sum: 209900,
+                 type_operation: 1}
+client = ::Ifns::Client.new(example_data)
+client.create_validation
+# wait 500ms
+client.find_validation
+client.create_ticket
+# wait 500ms
+client.find_ticket
+```
+
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
