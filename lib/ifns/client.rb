@@ -4,6 +4,7 @@ module Ifns
 
     def initialize(options)
       @data = OpenStruct.new(options)
+      validate_data
     end
 
     def params
@@ -67,6 +68,11 @@ module Ifns
         Redis.current.set(options[:key], response.body[:id], ex: options[:expire])
         { id: Redis.current.get(options[:key]), cached: false }
       end
+    end
+
+    def validate_data
+      diff = %i[id fn fd fpd sum date type_operation] - data.to_h.keys
+      raise KeyError, "Missing key #{diff.join(', ')}" if diff.count > 0
     end
   end
 end
