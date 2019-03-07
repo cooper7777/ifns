@@ -3,8 +3,8 @@ require 'active_support/core_ext'
 require 'ifns/version'
 require 'ifns/client'
 require 'ifns/configuration'
-require 'ifns/response_ticket'
-require 'ifns/response_validation'
+require 'ifns/responses/ticket'
+require 'ifns/responses/validation'
 
 module Ifns
   class << self

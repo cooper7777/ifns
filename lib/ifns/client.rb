@@ -4,7 +4,7 @@ module Ifns
 
     def initialize(options)
       @data = OpenStruct.new(options)
-      validate_data
+      validate_keys
     end
 
     def params
@@ -25,7 +25,7 @@ module Ifns
       response = connection.get("/api/v1/validations/#{create_validation[:id]}") do |req|
         req.headers['X-Auth-Token'] = Ifns.configuration.token
       end
-      ResponseValidation.new(response)
+      Responses::Validation.new(response)
     end
 
     def create_ticket
@@ -42,7 +42,7 @@ module Ifns
       response = connection.get("/api/v1/tickets/#{create_ticket[:id]}") do |req|
         req.headers['X-Auth-Token'] = Ifns.configuration.token
       end
-      ResponseTicket.new(response)
+      Responses::Ticket.new(response)
     end
 
     private
@@ -70,7 +70,7 @@ module Ifns
       end
     end
 
-    def validate_data
+    def validate_keys
       diff = %i[id fn fd fpd sum date type_operation] - data.to_h.keys
       raise KeyError, "Missing key #{diff.join(', ')}" if diff.count > 0
     end
