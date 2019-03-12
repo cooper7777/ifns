@@ -14,7 +14,7 @@ module Ifns
       end
 
       def retry?
-        processing? || gone? || internal_error? || goods.blank?
+        processing? || gone? || internal_error? || goods.blank? || not_found?
       end
 
       def processing?
@@ -22,6 +22,10 @@ module Ifns
       end
 
       def error?
+        status == 400
+      end
+
+      def not_found?
         status == 404
       end
 
