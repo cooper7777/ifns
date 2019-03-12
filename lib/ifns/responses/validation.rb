@@ -1,16 +1,8 @@
 module Ifns
   module Responses
-    class Validation
-      attr_reader :response
-
-      def initialize(response)
-        @response = response
-      end
-
-      delegate :body, :status, to: :response
-
+    class Validation < Base
       def valid?
-        status == 200
+        good?
       end
 
       def invalid?
@@ -19,24 +11,6 @@ module Ifns
 
       def retry?
         gone? || internal_error? || accepted?
-      end
-
-      private
-
-      def incorrect_params?
-        status == 400
-      end
-
-      def gone?
-        status == 410
-      end
-
-      def internal_error?
-        status >= 500
-      end
-
-      def accepted?
-        status == 202
       end
     end
   end

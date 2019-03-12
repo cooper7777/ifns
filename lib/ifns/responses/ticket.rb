@@ -1,18 +1,6 @@
 module Ifns
   module Responses
-    class Ticket
-      attr_reader :response
-
-      def initialize(response)
-        @response = response
-      end
-
-      delegate :body, :status, to: :response
-
-      def good?
-        status == 200
-      end
-
+    class Ticket < Base
       def retry?
         processing? || gone? || internal_error? || goods.blank? || not_found? || accepted?
       end
@@ -22,7 +10,7 @@ module Ifns
       end
 
       def error?
-        status == 400
+        incorrect_params?
       end
 
       def goods
@@ -51,22 +39,6 @@ module Ifns
 
       def items_blank?
         ticket.try(:[], :items).blank?
-      end
-
-      def gone?
-        status == 410
-      end
-
-      def internal_error?
-        status >= 500
-      end
-
-      def not_found?
-        status == 404
-      end
-
-      def accepted?
-        status == 202
       end
     end
   end
