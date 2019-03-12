@@ -18,7 +18,7 @@ module Ifns
       end
 
       def retry?
-        gone? || internal_error?
+        gone? || internal_error? || accepted?
       end
 
       private
@@ -33,6 +33,10 @@ module Ifns
 
       def internal_error?
         status >= 500
+      end
+
+      def accepted?
+        status == 202
       end
     end
   end
