@@ -18,7 +18,7 @@ module Ifns
       end
 
       def processing?
-        status == 406
+        status == 406 || not_found? || goods.blank?
       end
 
       def error?
