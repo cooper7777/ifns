@@ -4,6 +4,7 @@ require 'ifns/version'
 require 'ifns/client'
 require 'ifns/configuration'
 require 'ifns/responses/base'
+require 'ifns/responses/cached'
 require 'ifns/responses/ticket'
 require 'ifns/responses/validation'
 

@@ -23,7 +23,7 @@ module Ifns
     end
 
     def find_validation
-      response = connection.get("/api/v1/validations/#{create_validation[:id]}") do |req|
+      response = connection.get("/api/v1/validations/#{create_validation.id}") do |req|
         req.headers['X-Auth-Token'] = Ifns.configuration.token
       end
       Responses::Validation.new(response)
@@ -41,7 +41,7 @@ module Ifns
     end
 
     def find_ticket
-      response = connection.get("/api/v1/tickets/#{create_ticket[:id]}") do |req|
+      response = connection.get("/api/v1/tickets/#{create_ticket.id}") do |req|
         req.headers['X-Auth-Token'] = Ifns.configuration.token
       end
       Responses::Ticket.new(response)
@@ -62,13 +62,13 @@ module Ifns
 
     def caching(options)
       if Redis.current.get(options[:key]).present?
-        { id: Redis.current.get(options[:key]), cached: true }
+        Responses::Cached.new(id: Redis.current.get(options[:key]), cached: true)
       else
         response = yield
         return response unless response.status == 200
 
         Redis.current.set(options[:key], response.body[:id], ex: options[:expire])
-        { id: Redis.current.get(options[:key]), cached: false }
+        Responses::Cached.new(id: Redis.current.get(options[:key]), cached: false)
       end
     end
 
