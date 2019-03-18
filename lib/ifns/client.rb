@@ -13,11 +13,12 @@ module Ifns
 
     def create_validation
       caching(key: "ifns:validation_id:#{data.id}", expire: 60.seconds) do
-        connection.post('/api/v1/validations') do |req|
+        response = connection.post('/api/v1/validations') do |req|
           req.headers['Content-Type'] = 'application/json'
           req.headers['X-Auth-Token'] = Ifns.configuration.token
           req.body = params.to_json
         end
+        Responses::Validation.new(response)
       end
     end
 
@@ -30,11 +31,12 @@ module Ifns
 
     def create_ticket
       caching(key: "ifns:ticket_id:#{data.id}", expire: 60.seconds) do
-        connection.post('/api/v1/tickets') do |req|
+        response = connection.post('/api/v1/tickets') do |req|
           req.headers['Content-Type'] = 'application/json'
           req.headers['X-Auth-Token'] = Ifns.configuration.token
           req.body = params.to_json
         end
+        Responses::Ticket.new(response)
       end
     end
 
@@ -63,7 +65,7 @@ module Ifns
         { id: Redis.current.get(options[:key]), cached: true }
       else
         response = yield
-        return Responses::Base.new(response) unless response.status == 200
+        return response unless response.status == 200
 
         Redis.current.set(options[:key], response.body[:id], ex: options[:expire])
         { id: Redis.current.get(options[:key]), cached: false }
