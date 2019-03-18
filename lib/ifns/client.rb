@@ -63,7 +63,7 @@ module Ifns
         { id: Redis.current.get(options[:key]), cached: true }
       else
         response = yield
-        return response unless response.status == 200
+        return Responses::Base.new(response) unless response.status == 200
 
         Redis.current.set(options[:key], response.body[:id], ex: options[:expire])
         { id: Redis.current.get(options[:key]), cached: false }
