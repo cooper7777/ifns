@@ -62,13 +62,13 @@ module Ifns
 
     def caching(options)
       if Redis.current.get(options[:key]).present?
-        Responses::Cached.new(id: Redis.current.get(options[:key]), cached: true)
+        Responses::Cached.new(Redis.current.get(options[:key]), true)
       else
         response = yield
         return response unless response.status == 200
 
         Redis.current.set(options[:key], response.body[:id], ex: options[:expire])
-        Responses::Cached.new(id: Redis.current.get(options[:key]), cached: false)
+        Responses::Cached.new(Redis.current.get(options[:key]), false)
       end
     end
 
