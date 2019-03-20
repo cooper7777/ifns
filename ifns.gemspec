@@ -28,5 +28,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'activesupport', '~> 5.0'
   spec.add_runtime_dependency 'faraday', '>= 0.12.2'
   spec.add_runtime_dependency 'faraday-encoding', '>= 0.0.4'
+  spec.add_runtime_dependency 'faraday_middleware'
   spec.add_runtime_dependency 'redis', '>= 2.2'
 end

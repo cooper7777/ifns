@@ -1,3 +1,6 @@
+require 'faraday'
+require 'faraday-encoding'
+require 'faraday_middleware'
 require 'active_support'
 require 'active_support/core_ext'
 require 'ifns/version'
