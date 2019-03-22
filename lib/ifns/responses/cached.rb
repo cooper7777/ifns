@@ -1,8 +1,6 @@
 module Ifns
   module Responses
     class Cached < Base
-      attr_reader :id, :cached
-
       def initialize(id, cached)
         @id = id
         @cached = cached

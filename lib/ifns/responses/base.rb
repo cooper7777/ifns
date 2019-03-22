@@ -1,7 +1,7 @@
 module Ifns
   module Responses
     class Base
-      attr_reader :response
+      attr_reader :response, :cached, :id
 
       delegate :body, :status, to: :response
 
