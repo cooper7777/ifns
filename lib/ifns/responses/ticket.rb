@@ -21,7 +21,7 @@ module Ifns
           items = body[:receipt][:items].map(&:dup)
           items.map do |good|
             good[:name] = good[:name].try(:squish)
-            good[:price] = (good[:price] / devider)
+            good[:price] = (good[:price].to_f / devider)
             good[:sum] = (good[:sum] / devider)
             good
           end
