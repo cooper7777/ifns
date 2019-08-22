@@ -22,7 +22,7 @@ module Ifns
           items.map do |good|
             good[:name] = good[:name].try(:squish)
             good[:price] = (good[:price].to_f / devider)
-            good[:sum] = (good[:sum] / devider)
+            good[:sum] = (good[:sum].to_f / devider)
             good
           end
         end
