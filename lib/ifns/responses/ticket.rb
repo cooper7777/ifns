@@ -1,18 +1,6 @@
 module Ifns
   module Responses
     class Ticket < Base
-      def retry?
-        processing? || gone? || internal_error? || goods.blank? || not_found? || accepted?
-      end
-
-      def processing?
-        status == 406 || not_found? || goods.blank?
-      end
-
-      def error?
-        incorrect_params?
-      end
-
       def goods
         @goods ||= begin
           return if items_blank?

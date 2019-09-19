@@ -9,6 +9,18 @@ module Ifns
         @response = response
       end
 
+      def valid?
+        good?
+      end
+
+      def invalid?
+        incorrect_fpd? || incorrect_params? || not_found?
+      end
+
+      def retry?
+        gone? || accepted?
+      end
+
       def good?
         status == 200
       end
@@ -35,6 +47,10 @@ module Ifns
 
       def rate_limit_exceeded?
         status == 429
+      end
+
+      def incorrect_fpd?
+        status == 406
       end
     end
   end

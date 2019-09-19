@@ -23,11 +23,11 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler', '~> 2.0'
   spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency 'rubocop', '~> 0.61.1'
+  spec.add_development_dependency 'rubocop', '~> 0.72.0'
 
   spec.add_runtime_dependency 'activesupport', '~> 5.0'
-  spec.add_runtime_dependency 'faraday', '>= 0.12.2'
-  spec.add_runtime_dependency 'faraday-encoding', '>= 0.0.4'
-  spec.add_runtime_dependency 'faraday_middleware'
-  spec.add_runtime_dependency 'redis', '>= 2.2'
+  spec.add_runtime_dependency 'faraday', '~> 0.15'
+  spec.add_runtime_dependency 'faraday-encoding', '~> 0.0', '>= 0.0.5'
+  spec.add_runtime_dependency 'faraday_middleware', '~> 0'
+  spec.add_runtime_dependency 'redis', '~> 4.1'
 end
