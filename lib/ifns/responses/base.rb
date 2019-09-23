@@ -14,11 +14,11 @@ module Ifns
       end
 
       def invalid?
-        incorrect_fpd? || incorrect_params? || not_found?
+        incorrect_fpd? || incorrect_params?
       end
 
       def retry?
-        gone? || accepted?
+        gone? || accepted? || not_found?
       end
 
       def good?
