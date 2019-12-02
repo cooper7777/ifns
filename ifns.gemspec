@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rubocop', '~> 0.72.0'
 
-  spec.add_runtime_dependency 'activesupport', '~> 5.0', '> 5.0'
+  spec.add_runtime_dependency 'activesupport', '~> 0'
   spec.add_runtime_dependency 'faraday', '~> 0.15'
   spec.add_runtime_dependency 'faraday-encoding', '~> 0.0', '>= 0.0.5'
   spec.add_runtime_dependency 'faraday_middleware', '~> 0'
