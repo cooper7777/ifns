@@ -50,7 +50,7 @@ module Ifns
       end
 
       def incorrect_fpd?
-        status == 406
+        [406, 454, 452, 453].include? status
       end
     end
   end
