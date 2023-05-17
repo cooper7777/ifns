@@ -34,7 +34,7 @@ module Ifns
       end
 
       def not_found?
-        status == 404 || status == 455
+        status == 404 || status == 455 || status == 545
       end
 
       def accepted?
