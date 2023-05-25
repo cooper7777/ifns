@@ -30,7 +30,7 @@ module Ifns
       end
 
       def internal_error?
-        status >= 500
+        status >= 500 && status != 545 && status != 544
       end
 
       def not_found?
