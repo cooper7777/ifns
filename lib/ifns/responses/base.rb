@@ -30,12 +30,11 @@ module Ifns
       end
 
       def internal_error?
-        status >= 500 && status != 545 && status != 544
+        status >= 500 && status != 545 && status != 544 && status != 546
       end
 
       def not_found?
-        p '### status in fns gem: ' + status.to_s + ' type '+ status.class.to_s
-        status == 404 || status == 455 || status == 545 || status == 544
+        status == 404 || status == 455 || status == 545 || status == 544 || status == 546
       end
 
       def accepted?
